@@ -11307,13 +11307,6 @@ body.modal-open {
   overscroll-behavior: none;
 }
 
-html.modal-scroll-lock,
-body.modal-scroll-lock {
-  overflow: hidden !important;
-  overscroll-behavior: none !important;
-  height: 100%;
-}
-
 .portfolio-modal .modal-dialog {
   margin-top: 0;
   margin-bottom: 1rem;

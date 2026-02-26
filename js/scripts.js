@@ -44,82 +44,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const portfolioModals = Array.from(document.querySelectorAll('.portfolio-modal'));
     let lockedScrollY = 0;
     let openModalCount = 0;
-    let lastTouchY = 0;
-    let touchLockBound = false;
-
-    const isScrollable = (element) => {
-        if (!element) {
-            return false;
-        }
-        return element.scrollHeight > element.clientHeight + 1;
-    };
-
-    const getOpenModalScrollContainer = (target) => {
-        const openModal = target.closest('.portfolio-modal.show');
-        if (!openModal) {
-            return null;
-        }
-        const modalBody = openModal.querySelector('.modal-body');
-        if (isScrollable(modalBody)) {
-            return modalBody;
-        }
-        if (isScrollable(openModal)) {
-            return openModal;
-        }
-        return modalBody || openModal;
-    };
-
-    const onTouchStartLock = (event) => {
-        if (!document.body.classList.contains('modal-scroll-lock') || !event.touches || !event.touches.length) {
-            return;
-        }
-        lastTouchY = event.touches[0].clientY;
-    };
-
-    const onTouchMoveLock = (event) => {
-        if (!document.body.classList.contains('modal-scroll-lock') || !event.touches || !event.touches.length) {
-            return;
-        }
-
-        const scrollContainer = getOpenModalScrollContainer(event.target);
-        if (!scrollContainer) {
-            event.preventDefault();
-            return;
-        }
-
-        const currentY = event.touches[0].clientY;
-        const deltaY = currentY - lastTouchY;
-        lastTouchY = currentY;
-
-        if (!isScrollable(scrollContainer)) {
-            return;
-        }
-
-        const atTop = scrollContainer.scrollTop <= 0;
-        const atBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 1;
-
-        if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
-            event.preventDefault();
-        }
-    };
-
-    const bindTouchLock = () => {
-        if (touchLockBound) {
-            return;
-        }
-        document.addEventListener('touchstart', onTouchStartLock, { passive: false });
-        document.addEventListener('touchmove', onTouchMoveLock, { passive: false });
-        touchLockBound = true;
-    };
-
-    const unbindTouchLock = () => {
-        if (!touchLockBound) {
-            return;
-        }
-        document.removeEventListener('touchstart', onTouchStartLock);
-        document.removeEventListener('touchmove', onTouchMoveLock);
-        touchLockBound = false;
-    };
 
     const lockPageScroll = () => {
         if (openModalCount > 0) {
@@ -133,9 +57,6 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.style.left = '0';
         document.body.style.right = '0';
         document.body.style.width = '100%';
-        document.documentElement.classList.add('modal-scroll-lock');
-        document.body.classList.add('modal-scroll-lock');
-        bindTouchLock();
     };
 
     const unlockPageScroll = () => {
@@ -149,9 +70,6 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.style.left = '';
         document.body.style.right = '';
         document.body.style.width = '';
-        document.documentElement.classList.remove('modal-scroll-lock');
-        document.body.classList.remove('modal-scroll-lock');
-        unbindTouchLock();
         window.scrollTo(0, lockedScrollY);
     };
 
