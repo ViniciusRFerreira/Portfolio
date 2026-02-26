@@ -11303,9 +11303,23 @@ body.modal-open #mainNav {
   z-index: 1000 !important;
 }
 
+body.modal-open {
+  overscroll-behavior: none;
+}
+
 .portfolio-modal .modal-dialog {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+.portfolio-modal,
+.portfolio-modal .modal-content,
+.portfolio-modal .modal-body {
+  overscroll-behavior: contain;
+}
+
+.portfolio-modal .modal-body {
+  -webkit-overflow-scrolling: touch;
 }
 
 .portfolio-modal .modal-header {
