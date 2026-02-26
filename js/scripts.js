@@ -53,6 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const splitTargets = Array.from(document.querySelectorAll(
         '.masthead-heading, #portfolio .page-section-heading, #about .page-section-heading, #contact .page-section-heading'
     ));
+    const shouldSplitText = window.innerWidth >= 768;
 
     const splitToChars = (element) => {
         if (!element || element.dataset.splitReady === '1') {
@@ -70,7 +71,9 @@ window.addEventListener('DOMContentLoaded', () => {
         element.dataset.splitReady = '1';
     };
 
-    splitTargets.forEach(splitToChars);
+    if (shouldSplitText) {
+        splitTargets.forEach(splitToChars);
+    }
 
     gsap.set(
         '.masthead-heading, .masthead-subheading, .page-section-heading, .divider-custom, .lead, .contact-social-icon, .footer',
@@ -87,11 +90,11 @@ window.addEventListener('DOMContentLoaded', () => {
             { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.05, clearProps: 'filter,transform,opacity' },
             '-=0.1'
         )
-        .from('.masthead-heading .char', {
+        .from(shouldSplitText ? '.masthead-heading .char' : '.masthead-heading', {
             autoAlpha: 0,
             y: 64,
             rotationX: -70,
-            stagger: 0.03,
+            stagger: shouldSplitText ? 0.03 : 0,
             duration: 0.58,
             ease: 'back.out(1.8)',
         }, '-=0.72')
@@ -140,32 +143,32 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        gsap.from('#portfolio .page-section-heading .char', {
+        gsap.from(shouldSplitText ? '#portfolio .page-section-heading .char' : '#portfolio .page-section-heading', {
             scrollTrigger: { trigger: '#portfolio', start: 'top 80%', once: true },
             autoAlpha: 0,
             y: 38,
             rotation: () => gsap.utils.random(-14, 14),
-            stagger: 0.026,
+            stagger: shouldSplitText ? 0.026 : 0,
             duration: 0.55,
             ease: 'power3.out',
         });
 
-        gsap.from('#about .page-section-heading .char', {
+        gsap.from(shouldSplitText ? '#about .page-section-heading .char' : '#about .page-section-heading', {
             scrollTrigger: { trigger: '#about', start: 'top 82%', once: true },
             autoAlpha: 0,
             x: -22,
             rotationY: 70,
-            stagger: 0.028,
+            stagger: shouldSplitText ? 0.028 : 0,
             duration: 0.52,
             ease: 'power2.out',
         });
 
-        gsap.from('#contact .page-section-heading .char', {
+        gsap.from(shouldSplitText ? '#contact .page-section-heading .char' : '#contact .page-section-heading', {
             scrollTrigger: { trigger: '#contact', start: 'top 84%', once: true },
             autoAlpha: 0,
             scale: 0.35,
             y: 18,
-            stagger: 0.022,
+            stagger: shouldSplitText ? 0.022 : 0,
             duration: 0.48,
             ease: 'elastic.out(1, 0.62)',
         });

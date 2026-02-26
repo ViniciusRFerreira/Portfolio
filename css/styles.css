@@ -226,6 +226,11 @@ body {
   margin: 0;
   background-color: #808080; 
   color: #ffffff;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 #mainNav {
@@ -268,10 +273,12 @@ body {
 .lang-switch::after {
   content: attr(data-hover-tip);
   position: absolute;
-  left: 50%;
+  left: 0;
   top: calc(100% + 14px);
-  transform: translateX(-50%) translateY(0);
-  white-space: nowrap;
+  transform: translateY(0);
+  white-space: normal;
+  min-width: 170px;
+  max-width: 240px;
   font-size: 0.74rem;
   text-transform: none;
   letter-spacing: 0.02em;
@@ -287,7 +294,7 @@ body {
 
 .lang-switch:hover::after {
   opacity: 1;
-  transform: translateX(-50%) translateY(2px);
+  transform: translateY(2px);
 }
 
 .hover-tip {
@@ -298,7 +305,7 @@ body {
   content: attr(data-hover-tip);
   position: absolute;
   left: 50%;
-  top: calc(100% + 20px);
+  top: calc(100% + 26px);
   transform: translateX(-50%) translateY(0);
   white-space: nowrap;
   font-size: 0.74rem;
@@ -11436,7 +11443,7 @@ html {
 
 .footer {
   padding-top: 5rem;
-  padding-bottom: 0.45rem;
+  padding-bottom: 0.12rem;
   background-color: #ffffff;
   color: #fff;
 }
@@ -11501,8 +11508,8 @@ html {
 .footer-copyright {
   color: #ffffff;
   opacity: 0.92;
-  margin-top: 6.2rem !important;
-  padding-bottom: 0.02rem;
+  margin-top: 7rem !important;
+  padding-bottom: 0;
 }
 
 @keyframes slideInUp {
@@ -11585,7 +11592,7 @@ header.masthead:hover {
   }
 
   .footer-copyright {
-    margin-top: 4.4rem !important;
+    margin-top: 5rem !important;
   }
 
   .portfolio-card-title {
