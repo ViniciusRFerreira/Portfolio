@@ -47,12 +47,26 @@ window.addEventListener('DOMContentLoaded', () => {
     let lastTouchY = 0;
     let touchLockBound = false;
 
+    const isScrollable = (element) => {
+        if (!element) {
+            return false;
+        }
+        return element.scrollHeight > element.clientHeight + 1;
+    };
+
     const getOpenModalScrollContainer = (target) => {
         const openModal = target.closest('.portfolio-modal.show');
         if (!openModal) {
             return null;
         }
-        return openModal.querySelector('.modal-body') || openModal;
+        const modalBody = openModal.querySelector('.modal-body');
+        if (isScrollable(modalBody)) {
+            return modalBody;
+        }
+        if (isScrollable(openModal)) {
+            return openModal;
+        }
+        return modalBody || openModal;
     };
 
     const onTouchStartLock = (event) => {
@@ -76,6 +90,10 @@ window.addEventListener('DOMContentLoaded', () => {
         const currentY = event.touches[0].clientY;
         const deltaY = currentY - lastTouchY;
         lastTouchY = currentY;
+
+        if (!isScrollable(scrollContainer)) {
+            return;
+        }
 
         const atTop = scrollContainer.scrollTop <= 0;
         const atBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 1;
