@@ -11434,6 +11434,15 @@ html {
   letter-spacing: 0.1em;
   font-weight: 700;
   transition: all 0.4s ease;
+  line-height: 1.2 !important;
+  white-space: normal;
+  word-break: normal;
+}
+
+.masthead-heading .char {
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: baseline;
 }
 
 .masthead .lead {
@@ -11598,6 +11607,16 @@ header.masthead:hover {
   .portfolio-card-title {
     font-size: 0.78rem;
     min-height: auto;
+  }
+
+  .masthead .masthead-heading {
+    font-size: clamp(1.7rem, 8.6vw, 2.35rem);
+    line-height: 1.18 !important;
+    letter-spacing: 0.04em;
+    max-width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-wrap: anywhere;
   }
 }
 
