@@ -11290,6 +11290,14 @@ html {
   position: relative;
 }
 
+.portfolio-modal.modal {
+  z-index: 2000;
+}
+
+.modal-backdrop {
+  z-index: 1990;
+}
+
 .portfolio-modal .modal-header {
   position: absolute;
   top: 1rem;
