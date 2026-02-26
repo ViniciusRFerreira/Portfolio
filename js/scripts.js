@@ -71,8 +71,20 @@ window.addEventListener('DOMContentLoaded', () => {
         element.dataset.splitReady = '1';
     };
 
+    const unsplitText = (element) => {
+        if (!element) {
+            return;
+        }
+        if (element.querySelector('.char')) {
+            element.textContent = element.textContent;
+        }
+        delete element.dataset.splitReady;
+    };
+
     if (shouldSplitText) {
         splitTargets.forEach(splitToChars);
+    } else {
+        splitTargets.forEach(unsplitText);
     }
 
     gsap.set(
@@ -89,15 +101,29 @@ window.addEventListener('DOMContentLoaded', () => {
             { autoAlpha: 0, scale: 0.75, filter: 'blur(10px)' },
             { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.05, clearProps: 'filter,transform,opacity' },
             '-=0.1'
-        )
-        .from(shouldSplitText ? '.masthead-heading .char' : '.masthead-heading', {
+        );
+
+    if (shouldSplitText) {
+        heroTl.from('.masthead-heading .char', {
             autoAlpha: 0,
             y: 64,
             rotationX: -70,
-            stagger: shouldSplitText ? 0.03 : 0,
+            stagger: 0.03,
             duration: 0.58,
             ease: 'back.out(1.8)',
-        }, '-=0.72')
+            clearProps: 'transform,opacity',
+        }, '-=0.72');
+    } else {
+        heroTl.from('.masthead-heading', {
+            autoAlpha: 0,
+            y: 28,
+            duration: 0.56,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+        }, '-=0.72');
+    }
+
+    heroTl
         .from('.masthead .divider-custom', { autoAlpha: 0, y: 30, scaleX: 0.6, duration: 0.62 }, '-=0.45')
         .from('.masthead-subheading', { autoAlpha: 0, y: 26, filter: 'blur(6px)', duration: 0.66 }, '-=0.38');
 

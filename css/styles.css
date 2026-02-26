@@ -11610,13 +11610,24 @@ header.masthead:hover {
   }
 
   .masthead .masthead-heading {
-    font-size: clamp(1.7rem, 8.6vw, 2.35rem);
-    line-height: 1.18 !important;
-    letter-spacing: 0.04em;
-    max-width: 95vw;
+    font-size: clamp(1.95rem, 7.8vw, 2.6rem);
+    line-height: 1.08 !important;
+    letter-spacing: 0.05em;
+    max-width: 96vw;
     margin-left: auto;
     margin-right: auto;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: none;
+    text-wrap: balance;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .masthead .masthead-heading .char {
+    display: inline;
+    transform: none !important;
+    filter: none !important;
   }
 }
 
