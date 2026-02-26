@@ -11291,12 +11291,12 @@ html {
 }
 
 .portfolio-modal.modal {
-  z-index: 2000 !important;
+  z-index: 12000 !important;
   padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
 }
 
 .modal-backdrop {
-  z-index: 1990 !important;
+  z-index: 11990 !important;
 }
 
 body.modal-open #mainNav {
@@ -11348,6 +11348,14 @@ body.modal-open #mainNav {
   }
   .portfolio-modal .modal-body {
     padding-top: 3.75rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  body.modal-open #mainNav {
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
   }
 }
 .portfolio-modal .portfolio-modal-title {
